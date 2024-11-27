@@ -95,7 +95,7 @@ def mine_ecogreen(disk_letter):
 def add_icon_to_exe():
 
     icon_path = "icon.ico"  
-    windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_NAME) 
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_NAME)  
 
 if __name__ == "__main__":
     check_for_updates() 
