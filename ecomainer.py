@@ -2,9 +2,19 @@ import os
 import time
 import sys
 import urllib.request
+from ctypes import windll
+import ctypes
 
 UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt" 
+
+# Установим имя программы и иконку
+APP_NAME = "Ecogreen Miner"
+APP_VERSION = "0.0"
+APP_DESCRIPTION = "Official Ecogreen Mining Application."
+APP_AUTHOR = "Mavox-ID"
+APP_COMPANY = "OOO Kripto"
+APP_CITY = "NaN"
 
 def check_for_updates():
     try:
@@ -23,13 +33,15 @@ def check_for_updates():
         print(f"Failed to check for updates: {e}")
 
 def display_intro():
-    intro_text = """
+    intro_text = f"""
     Welcome to the official Ecogreen mining application!
     Here you can mine Ecogreen cryptocurrency and purchase additional assets and speeds.
     By default, 10 files are created per second, earning 0.001 Ecogreen per second.
     Current rate: 10 UAH = 1 Ecogreen.
     Attention! Ecogreen releases updates regularly. If you use an outdated version, withdrawals may not be supported.
     Ensure your balance is above 50 Ecogreen for compatibility with newer versions!
+    Version: {APP_VERSION}
+    City: {APP_CITY}
     """
     sys.stdout.write("\033[H\033[J") 
     print(intro_text)
@@ -78,7 +90,12 @@ def mine_ecogreen(disk_letter):
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
-        time.sleep(0.1) 
+        time.sleep(0.1)
+
+def add_icon_to_exe():
+    # Вставляем иконку в exe файл
+    icon_path = "icon.ico"  # Путь к файлу иконки
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_NAME)  # Установка идентификатора процесса с иконкой
 
 if __name__ == "__main__":
     check_for_updates() 
