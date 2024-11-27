@@ -119,6 +119,7 @@ if __name__ == "__main__":
             
             if check_disk_exists(disk_letter):
                 print(f"Disk {disk_letter}:/ found. Starting mining...")
+                time.sleep(5)
                 mine_ecogreen(disk_letter)
             else:
                 print(f"Disk {disk_letter}:/ not found. Try again.")
