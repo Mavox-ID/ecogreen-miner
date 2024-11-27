@@ -85,12 +85,12 @@ def mine_ecogreen(disk_letter):
             save_balance(balance, uah_balance)
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
-        print("HS: 10 F/S")
+        print("HS: 10.000 F/S")
         print(f"CR: Created file {file_path}")
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
-        time.sleep(0.1)
+        time.sleep(0.001)
 
 def add_icon_to_exe():
 
@@ -111,7 +111,7 @@ if __name__ == "__main__":
             print(
                 "You can use a disk with another volume. Write the letter of the volume (uppercase only):"
             )
-            disk_letter = input("Enter the letter of the disk to use(Attention! Do not select the C drive under any circumstances): ").strip().upper()
+            disk_letter = input("Enter the letter of the disk to use: ").strip().upper()
 
             if len(disk_letter) != 1:
                 print("Invalid input. Please enter a single letter.")
