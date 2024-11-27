@@ -3,7 +3,7 @@ import time
 import sys
 import requests
 
-UPDATE_URL = "https://example.com/latest_version.py"  # Укажите URL для обновлений
+UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"  # Укажите URL для обновлений
 
 def check_for_updates():
     """Проверяет наличие обновлений и обновляет программу."""
