@@ -111,7 +111,7 @@ if __name__ == "__main__":
             print(
                 "You can use a disk with another volume. Write the letter of the volume (uppercase only):"
             )
-            disk_letter = input("Enter the letter of the disk to use: ").strip().upper()
+            disk_letter = input("Enter the letter of the disk to use(Attention! Do not select the C drive under any circumstances): ").strip().upper()
 
             if len(disk_letter) != 1:
                 print("Invalid input. Please enter a single letter.")
