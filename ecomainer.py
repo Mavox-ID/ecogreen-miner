@@ -3,10 +3,10 @@ import time
 import sys
 import requests
 
-UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"  # Укажите URL для обновлений
+UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"
+BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"  # Путь к файлу для хранения баланса
 
 def check_for_updates():
-    """Проверяет наличие обновлений и обновляет программу."""
     try:
         response = requests.get(UPDATE_URL, timeout=5)
         response.raise_for_status()
@@ -17,13 +17,12 @@ def check_for_updates():
         if response.text != current_code:
             with open(__file__, "w") as current_file:
                 current_file.write(response.text)
-            print("Application updated. Please restart the program.")
+            print("The application is updated. Please restart the program, otherwise, the conclusion from the old miner will be reset.")
             sys.exit()
     except Exception as e:
         print(f"Failed to check for updates: {e}")
 
 def display_intro():
-    """Отображает приветственное сообщение."""
     intro_text = """
     Welcome to the official Ecogreen mining application!
     Here you can mine Ecogreen cryptocurrency and purchase additional assets and speeds.
@@ -37,17 +36,32 @@ def display_intro():
     time.sleep(10)
 
 def check_disk_exists(disk_letter):
-    """Проверяет, существует ли диск."""
     return os.path.exists(f"{disk_letter}:/")
 
+def load_balance():
+    """Загружаем сохраненный баланс из файла, если файл существует"""
+    if os.path.exists(BALANCE_FILE):
+        with open(BALANCE_FILE, "r") as f:
+            lines = f.readlines()
+            if len(lines) >= 2:
+                ecogreen_balance = float(lines[0].strip())
+                uah_balance = float(lines[1].strip())
+                return ecogreen_balance, uah_balance
+    return 0.0, 0.0  # Если файл не найден, начинаем с 0
+
+def save_balance(ecogreen_balance, uah_balance):
+    """Сохраняем баланс в файл"""
+    with open(BALANCE_FILE, "w") as f:
+        f.write(f"{ecogreen_balance}\n{uah_balance}")
+
 def mine_ecogreen(disk_letter):
-    """Процесс майнинга Ecogreen."""
     ecogreen_folder = f"{disk_letter}:/Ecogreen"
     os.makedirs(ecogreen_folder, exist_ok=True)
 
-    balance = 0.0
+    # Загружаем баланс из файла
+    balance, uah_balance = load_balance()
+
     file_count = 0
-    uah_balance = 0.0
 
     while True:
         # Создаем файл 1 байт
@@ -61,7 +75,10 @@ def mine_ecogreen(disk_letter):
         if file_count % 100 == 0:
             balance += 0.01
             uah_balance = balance * 10.0  # Допустим, 1 Ecogreen = 10 UAH
-        
+
+            # Сохраняем обновленные данные в файл
+            save_balance(balance, uah_balance)
+
         # Обновляем отображение в консоли
         sys.stdout.write("\033[H\033[J")  # Очистка экрана
         print(f"HDD: {disk_letter}:/")
