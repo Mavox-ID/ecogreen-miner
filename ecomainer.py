@@ -8,7 +8,7 @@ import ctypes
 UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt" 
 
-# Установим имя программы и иконку
+
 APP_NAME = "Ecogreen Miner"
 APP_VERSION = "0.0"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
@@ -93,9 +93,9 @@ def mine_ecogreen(disk_letter):
         time.sleep(0.1)
 
 def add_icon_to_exe():
-    # Вставляем иконку в exe файл
-    icon_path = "icon.ico"  # Путь к файлу иконки
-    windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_NAME)  # Установка идентификатора процесса с иконкой
+
+    icon_path = "icon.ico"  
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_NAME) 
 
 if __name__ == "__main__":
     check_for_updates() 
