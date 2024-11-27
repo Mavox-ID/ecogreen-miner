@@ -85,12 +85,12 @@ def mine_ecogreen(disk_letter):
             save_balance(balance, uah_balance)
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
-        print("HS: 10 F/S")
+        print("HS: 1000 F/S")
         print(f"CR: Created file {file_path}")
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
-        time.sleep(0.1)
+        time.sleep(0.001)
 
 def add_icon_to_exe():
 
