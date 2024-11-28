@@ -11,7 +11,7 @@ UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/eco
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
 
 APP_NAME = "Ecogreen Miner"
-APP_VERSION = "4.0"
+APP_VERSION = "4.1"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
 APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
