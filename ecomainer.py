@@ -11,7 +11,7 @@ UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/eco
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
 
 APP_NAME = "Ecogreen Miner"
-APP_VERSION = "4.1"
+APP_VERSION = "4.2"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
 APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
@@ -86,7 +86,7 @@ def mine_ecogreen(disk_letter):
 
         try:
             result = math.sqrt(a) / b - c  
-            tasks_resolved += 10
+            tasks_resolved += 2
         except ZeroDivisionError:
             pass
 
@@ -98,7 +98,7 @@ def mine_ecogreen(disk_letter):
         file_count += 1
         if file_count % 100 == 0:
             balance += 0.01  
-            uah_balance = balance * 10.0  
+            uah_balance = balance * 230.0  
 
             save_balance(balance, uah_balance)
 
