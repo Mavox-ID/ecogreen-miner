@@ -28,9 +28,12 @@ def check_for_updates():
             with open(__file__, "w") as current_file:
                 current_file.write(response_text)
             print("The application is updated. Please restart the program, otherwise, the conclusion from the old miner will be reset.")
+            time.sleep(10)
             sys.exit()
     except Exception as e:
         print(f"Failed to check for updates: {e}")
+        time.sleep(5)
+        sys.exit()
 
 def display_intro():
     intro_text = f"""
