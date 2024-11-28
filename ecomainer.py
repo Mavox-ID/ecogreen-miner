@@ -10,7 +10,7 @@ BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
 
 
 APP_NAME = "Ecogreen Miner"
-APP_VERSION = "0.0"
+APP_VERSION = "3.4"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
 APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
@@ -41,7 +41,8 @@ def display_intro():
     Attention! Ecogreen releases updates regularly. If you use an outdated version, withdrawals may not be supported.
     Ensure your balance is above 50 Ecogreen for compatibility with newer versions!
     Version: {APP_VERSION}
-    City: {APP_CITY}
+    Company: {APP_COMPANY}
+    Author: {APP_AUTHOR}
     """
     sys.stdout.write("\033[H\033[J") 
     print(intro_text)
@@ -85,12 +86,12 @@ def mine_ecogreen(disk_letter):
             save_balance(balance, uah_balance)
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
-        print("HS: 100.000 F/S")
+        print("HS: 10 F/S")
         print(f"CR: Created file {file_path}")
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
-        time.sleep(0.0001)
+        time.sleep(0.1)
 
 def add_icon_to_exe():
 
