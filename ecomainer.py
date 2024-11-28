@@ -86,7 +86,7 @@ def mine_ecogreen(disk_letter):
 
         try:
             result = math.sqrt(a) / b - c  
-            tasks_resolved += 1
+            tasks_resolved += 10
         except ZeroDivisionError:
             pass
 
