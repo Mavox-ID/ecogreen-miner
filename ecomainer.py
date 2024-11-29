@@ -93,7 +93,7 @@ def mine_ecogreen(disk_letter):
        
         file_path = os.path.join(ecogreen_folder, f"ecogreen.h_{file_count}.eco")
         with open(file_path, "wb") as f:
-            f.write(b"\x00" * 1000000) 
+            f.write(b"\x00" * 500000) 
 
         file_count += 1
         if file_count % 300 == 0:
