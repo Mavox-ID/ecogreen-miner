@@ -21,7 +21,7 @@ APP_CITY = "NaN"
 
 # Константы для майнинга
 FILES_PER_COIN = 2000
-ECOGREEN_RATE = 3000.0
+ECOGREEN_RATE = 50.0
 FILES_PER_SECOND = 1
 
 def clear_screen():
