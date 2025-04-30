@@ -1,6 +1,6 @@
 # Ecogreen Miner
 
-Welcome to the <b>official statement for ecogreen!</b> Here you can get Ecogreen Cryptocurrant and purchase additional assets and speeds. By default, <b>10 files are created in a second</b>, earning 0.01 Ecogreen per <b>3 minutes and 20 second. Current: 3000 uah = 1 ecogreen.</b> Attention! Ecogreen regularly releases updates. If you use the outdated version, removal of funds cannot be supported. Make sure your balance exceeds <b>50 Ecogreen for compatibility with new versions!</b> The updates are installed automatically, <b>also if you change the code, the funds for the balance will stop, even if you reinstall the application!</b>
+Welcome to the <b>official statement for ecogreen!</b> Here you can get Ecogreen Cryptocurrant and purchase additional assets and speeds. By default, <b>10 files are created in a second</b>, earning 0.01 Ecogreen per <b>3 minutes and 20 second. Current: 50 uah = 1 ecogreen.</b> Attention! Ecogreen regularly releases updates. If you use the outdated version, removal of funds cannot be supported. Make sure your balance exceeds <b>50 Ecogreen for compatibility with new versions!</b> The updates are installed automatically, <b>also if you change the code, the funds for the balance will stop, even if you reinstall the application!</b>
 
 
 # Install for Win 10/11
