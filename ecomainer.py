@@ -6,6 +6,8 @@ import shutil
 import math
 import random
 from ctypes import windll
+import ssl
+import certifi  # Добавляем certifi для работы с SSL-сертификатами
 
 UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
@@ -19,22 +21,26 @@ APP_CITY = "NaN"
 
 def check_for_updates():
     try:
-        with urllib.request.urlopen(UPDATE_URL) as response:
+        # Создаём SSL-контекст с использованием certifi
+        context = ssl.create_default_context(cafile=certifi.where())
+        with urllib.request.urlopen(UPDATE_URL, context=context) as response:
             response_text = response.read().decode('utf-8')
 
-        with open(__file__, "r") as current_file:
+        with open(__file__, "r", encoding='utf-8') as current_file:
             current_code = current_file.read()
 
         if response_text != current_code:
-            with open(__file__, "w") as current_file:
+            with open(__file__, "w", encoding='utf-8') as current_file:
                 current_file.write(response_text)
             print("The application is updated. Please restart the program, otherwise, the conclusion from the old miner will be reset.")
             time.sleep(10)
             sys.exit()
+        else:
+            print("No updates available. Proceeding with current version.")
     except Exception as e:
         print(f"Failed to check for updates: {e}")
+        print("Continuing with the current version...")
         time.sleep(5)
-        sys.exit()
 
 def display_intro():
     intro_text = f"""
@@ -79,7 +85,6 @@ def mine_ecogreen(disk_letter):
     file_count = 0
 
     while True:
-       
         a = random.randint(1, 10000000000)
         b = random.randint(1, 1000000)
         c = random.randint(1, 1000000)
@@ -90,7 +95,6 @@ def mine_ecogreen(disk_letter):
         except ZeroDivisionError:
             pass
 
-       
         file_path = os.path.join(ecogreen_folder, f"ecogreen.h_{file_count}.eco")
         with open(file_path, "wb") as f:
             f.write(b"\x00" * 500000) 
@@ -102,7 +106,6 @@ def mine_ecogreen(disk_letter):
 
             save_balance(balance, uah_balance)
 
-       
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
         print("HS: 10 F/S")
@@ -110,7 +113,6 @@ def mine_ecogreen(disk_letter):
         print(f"DS: checked {tasks_resolved} tasks") 
         print(f"Balance: {balance:.2f} Ecogreen ({uah_balance:.2f} UAH)")
 
-       
         total, used, free = shutil.disk_usage(f"{disk_letter}:/")
         free_kb = free // 1024  
 
@@ -123,7 +125,6 @@ def mine_ecogreen(disk_letter):
             time.sleep(15)
             break
 
-        
         if free_kb >= 1024 * 1024:
             print(f"Remaining space: {free_kb / (1024 * 1024):.2f} GB")
         elif free_kb >= 1024:
