@@ -107,9 +107,9 @@ def mine_ecogreen(disk_letter):
         file_count += 1
 
         if file_count % FILES_PER_COIN == 0:
-            balance += 0.01  
-            uah_balance = balance * ECOGREEN_RATE
-            save_balance(balance, uah_balance)
+        balance += 0.01  
+        uah_balance = balance * ECOGREEN_RATE
+        save_balance(balance, uah_balance)
 
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
@@ -156,20 +156,29 @@ if __name__ == "__main__":
         else:
             print("HDD for mining Ecogreen cryptocurrency was not found.")
             print("You can use a disk with another volume. Write the letter of the volume (uppercase only):")
-            print("Warning: Do not select disk C:/, this may cause system issues!")
             disk_letter = input("Enter the letter of the disk to use: ").strip().upper()
 
             if len(disk_letter) != 1:
                 print("Invalid input. Please enter a single letter.")
                 continue
             
-            if disk_letter == "C":
-                print("Error: Disk C:/ cannot be used for mining. Please select another disk.")
-                continue
-            
             if check_disk_exists(disk_letter):
-                print(f"Disk {disk_letter}:/ found. Starting mining...")
-                time.sleep(5)
-                mine_ecogreen(disk_letter)
+                if disk_letter == "C":
+                    print("Warning! Mining on the C:/ drive may be dangerous for the system. Do you really want to continue? (y/n)")
+                    choice = input().strip().lower()
+                    if choice == "y":
+                        print("Disk C:/ selected. Starting mining...")
+                        time.sleep(5)
+                        mine_ecogreen(disk_letter)
+                    elif choice == "n":
+                        print("Operation canceled. Please select another disk.")
+                        continue
+                    else:
+                        print("Invalid choice. Please select another disk.")
+                        continue
+                else:
+                    print(f"Disk {disk_letter}:/ found. Starting mining...")
+                    time.sleep(5)
+                    mine_ecogreen(disk_letter)
             else:
                 print(f"Disk {disk_letter}:/ not found. Try again.")
