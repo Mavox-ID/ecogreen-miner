@@ -107,9 +107,9 @@ def mine_ecogreen(disk_letter):
         file_count += 1
 
         if file_count % FILES_PER_COIN == 0:
-        balance += 0.01  
-        uah_balance = balance * ECOGREEN_RATE
-        save_balance(balance, uah_balance)
+            balance += 0.01  
+            uah_balance = balance * ECOGREEN_RATE
+            save_balance(balance, uah_balance)
 
         sys.stdout.write("\033[H\033[J")
         print(f"HDD: {disk_letter}:/")
