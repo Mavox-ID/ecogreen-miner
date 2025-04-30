@@ -9,22 +9,21 @@ from ctypes import windll
 import ssl
 import certifi
 
-UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecomainer.py"
+UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/ecominer.py"
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
 
 APP_NAME = "Ecogreen Miner"
-APP_VERSION = "5.5"
+APP_VERSION = "6.0"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
 APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
 APP_CITY = "NaN"
 
 # Константы для майнинга
-FILES_PER_COIN = 2000  # Сколько файлов нужно для 0.01 Ecogreen
-ECOGREEN_RATE = 3000.0  # Курс: 1 Ecogreen = 3000 UAH
-FILES_PER_SECOND = 10  # Скорость создания файлов (10 файлов в секунду)
+FILES_PER_COIN = 2000
+ECOGREEN_RATE = 3000.0
+FILES_PER_SECOND = 1
 
-# Функция для очистки экрана (работает на Windows и Linux)
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -52,19 +51,19 @@ def check_for_updates():
 
 def display_intro():
     intro_text = f"""
-    Welcome to the official Ecogreen mining application!
-    Here you can mine Ecogreen cryptocurrency and purchase additional assets and speeds.
+    Welcome to the official Ecogreen mining app!
+    Here you can mine Ecogreen cryptocurrency and withdraw
     Mining details:
     - Speed: {FILES_PER_SECOND} files are created per second.
-    - Reward: Earn 0.01 Ecogreen for every {FILES_PER_COIN} files.
+    - Reward: earn 0.01 Ecogreen for every {FILES_PER_COIN} files.
     - Current rate: {ECOGREEN_RATE} UAH = 1 Ecogreen.
-    Attention! Ecogreen releases updates regularly. If you use an outdated version, withdrawals may not be supported.
-    Ensure your balance is above 50 Ecogreen for compatibility with newer versions!
+    Please note! Ecogreen releases updates regularly. If you are using an outdated version, withdrawals may not be supported.
+    Make sure your Ecogreen balance is saved after the update!
     Version: {APP_VERSION}
     Company: {APP_COMPANY}
     Author: {APP_AUTHOR}
     """
-    clear_screen()  # Очищаем экран перед выводом
+    clear_screen()
     print(intro_text)
     time.sleep(10)
 
@@ -115,7 +114,7 @@ def mine_ecogreen(disk_letter):
             uah_balance = balance * ECOGREEN_RATE
             save_balance(balance, uah_balance)
 
-        clear_screen()  # Очищаем экран перед каждым обновлением интерфейса
+        clear_screen()
         print(f"HDD: {disk_letter}:/")
         print(f"HS: {FILES_PER_SECOND} F/S")
         print(f"CR: Created file {file_path}")
@@ -143,7 +142,7 @@ def mine_ecogreen(disk_letter):
             print(f"Remaining space: {free_kb:.2f} KB")
         print("OOO kriptoTM & binance (Ecogreen 2019)")
 
-        time.sleep(0.1)  # 10 файлов в секунду
+        time.sleep(0.1)
 
 def add_icon_to_exe():
     icon_path = "icon.ico"  
@@ -154,45 +153,39 @@ if __name__ == "__main__":
     display_intro() 
 
     while True:
-        if check_disk_exists("D"):
-            clear_screen()
-            print("Disk D:/ found. Starting mining...")
-            time.sleep(5)
-            mine_ecogreen("D")
-        else:
-            clear_screen()
-            print("HDD for mining Ecogreen cryptocurrency was not found.")
-            print("You can use a disk with another volume. Write the letter of the volume (uppercase only):")
-            disk_letter = input("Enter the letter of the disk to use: ").strip().upper()
+        clear_screen()
+        print("Please select a disk for mining.")
+        print("You can use a disk with another volume. Write the letter of the volume (uppercase only):")
+        disk_letter = input("Enter the letter of the disk to use: ").strip().upper()
 
-            if len(disk_letter) != 1:
+        if len(disk_letter) != 1:
+            clear_screen()
+            print("Invalid input. Please enter a single letter.")
+            continue
+        
+        if check_disk_exists(disk_letter):
+            if disk_letter == "C":
                 clear_screen()
-                print("Invalid input. Please enter a single letter.")
-                continue
-            
-            if check_disk_exists(disk_letter):
-                if disk_letter == "C":
+                print("Warning! Mining on the C:/ drive may be dangerous for the system. Do you really want to continue? (y/n)")
+                choice = input().strip().lower()
+                if choice == "y":
                     clear_screen()
-                    print("Warning! Mining on the C:/ drive may be dangerous for the system. Do you really want to continue? (y/n)")
-                    choice = input().strip().lower()
-                    if choice == "y":
-                        clear_screen()
-                        print("Disk C:/ selected. Starting mining...")
-                        time.sleep(5)
-                        mine_ecogreen(disk_letter)
-                    elif choice == "n":
-                        clear_screen()
-                        print("Operation canceled. Please select another disk.")
-                        continue
-                    else:
-                        clear_screen()
-                        print("Invalid choice. Please select another disk.")
-                        continue
-                else:
-                    clear_screen()
-                    print(f"Disk {disk_letter}:/ found. Starting mining...")
+                    print("Disk C:/ selected. Starting mining...")
                     time.sleep(5)
                     mine_ecogreen(disk_letter)
+                elif choice == "n":
+                    clear_screen()
+                    print("Operation canceled. Please select another disk.")
+                    continue
+                else:
+                    clear_screen()
+                    print("Invalid choice. Please select another disk.")
+                    continue
             else:
                 clear_screen()
-                print(f"Disk {disk_letter}:/ not found. Try again.")
+                print(f"Disk {disk_letter}:/ found. Starting mining...")
+                time.sleep(5)
+                mine_ecogreen(disk_letter)
+        else:
+            clear_screen()
+            print(f"Disk {disk_letter}:/ not found. Try again.")
