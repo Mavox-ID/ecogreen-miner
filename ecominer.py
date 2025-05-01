@@ -13,14 +13,14 @@ UPDATE_URL = "https://raw.githubusercontent.com/Mavox-ID/ecogreen-miner/main/eco
 BALANCE_FILE = "C:/Intel/BB_ecogreen.txt"
 
 APP_NAME = "Ecogreen Miner"
-APP_VERSION = "6.0"
+APP_VERSION = "6.1"
 APP_DESCRIPTION = "Official Ecogreen Mining Application."
 APP_AUTHOR = "Mavox-ID"
 APP_COMPANY = "OOO Kripto"
 APP_CITY = "NaN"
 
 # Константы для майнинга
-FILES_PER_COIN = 2000
+FILES_PER_COIN = 4000
 ECOGREEN_RATE = 50.0
 FILES_PER_SECOND = 1
 
