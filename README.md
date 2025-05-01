@@ -11,7 +11,13 @@ Welcome to the <b>official statement for ecogreen!</b> Here you can get Ecogreen
 
 3)Find <b>python 3.12 (Only 3.12!)</b>
 
-4)Install, then select the file and run it
+4)Install python 3.12
+
+5)Write in terminal (Win+R then cmd and Enter) pip install certifi
+
+<b>If pip does not work, enter in the browser how to install pip in Windows 10/11</b>
+
+6)Then select the file and run it
 
 If you can't run it, try right-clicking on the application, then select the application and choose python 3.12, if you don't have it, try opening the terminal (Win+R then cmd and Enter), go to the file with the cd command and enter python or python3 ecominer.py, if that doesn't work, then below is another method
 
